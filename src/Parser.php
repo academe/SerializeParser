@@ -1,7 +1,7 @@
 <?php namespace Academe\SerializeParser;
 
 /**
- *
+ * The main parser.
  */
 
 class Parser
@@ -119,7 +119,7 @@ class Parser
                 break;
 
             default:
-                throw new Exception(sprintf('Unable to unserialize type "%s"', $type));
+                throw new \Exception(sprintf('Unable to unserialize type "%s"', $type));
         }
 
         return $val;
