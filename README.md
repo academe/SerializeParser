@@ -65,7 +65,8 @@ array(3) {
   }
   ["b"]=>
   bool(false)
-}*/
+}
+*/
 ~~~
 
 Note that the `StringReader` class has been unserialized as `stdClass` and the original
@@ -105,4 +106,8 @@ https://github.com/jqr/php-serialize/blob/master/lib/php_serialize.rb#L195
 There is a pretty good descriptino of some of the intricaces here:
 
 http://stackoverflow.com/questions/14297926/structure-of-a-serialized-php-string
+
+My origional SO question that led me to write my own solution:
+
+http://stackoverflow.com/questions/31219158/analyse-parse-a-serialized-php-data-containining-objects/31223873
 
