@@ -5,7 +5,7 @@ A PHP parser for serialized data, to be able to "peek" into serialize strings.
 
 I had a bunch of PHP serialized data in the datanase, and needed to peek into
 that data for presenting information to the administrator. There appeared to be
-no way to interpret this data in PHP without instantiating allt he objects that
+no way to interpret this data in PHP without instantiating all the objects that
 were in that data, and I did not want to do that.
 
 So here we are, a simple parser that takes a serialized data string, and tries
@@ -18,14 +18,14 @@ may not even exist in the application.
 Here is a simple example:
 
 ~~~php
-// Create a complex arr/object/string/number/boolean to serialize.
-$obj = new  \Academe\SerializeParser\StringReader('x');
+// Create a complex array/object/string/number/boolean to serialize.
+$obj = new  \Academe\SerializeParser\StringReader('xyz');
 $obj->foo = true;
 $data = ['a' => 1, ['foo' => 'bar', $obj, 'b' => false];
 $serialized = serialize($data);
 
 echo $serialized;
-//a:3:{s:1:"a";i:1;i:0;a:2:{s:3:"foo";s:3:"bar";i:0;O:36:"Academe\SerializeParser\StringReader":4:{s:6:"*pos";i:0;s:6:"*max";i:0;s:9:"*string";a:1:{i:0;s:1:"x";}s:3:"foo";b:1;}}s:1:"b";b:0;}
+//a:3:{s:1:"a";i:1;i:0;a:2:{s:3:"foo";s:3:"bar";i:0;O:36:"Academe\SerializeParser\StringReader":4:{s:6:"*pos";i:0;s:6:"*max";i:2;s:9:"*string";a:3:{i:0;s:1:"x";i:1;s:1:"y";i:2;s:1:"z";}s:3:"foo";b:1;}}s:1:"b";b:0;}
 
 // Now parse it to look what it inside, without instantiating the
 // original objects in it.
@@ -49,11 +49,15 @@ array(3) {
       ["pos"]=>
       int(0)
       ["max"]=>
-      int(0)
+      int(2)
       ["string"]=>
-      array(1) {
+      array(3) {
         [0]=>
         string(1) "x"
+        [1]=>
+        string(1) "y"
+        [2]=>
+        string(1) "z"
       }
       ["foo"]=>
       bool(true)
@@ -61,8 +65,7 @@ array(3) {
   }
   ["b"]=>
   bool(false)
-}
-*/
+}*/
 ~~~
 
 Note that the `StringReader` class has been unserialized as `stdClass` and the original
