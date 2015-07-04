@@ -100,15 +100,12 @@ some of those packages.
 This is not complete, so will not handle references for example, but does enough of
 the simple stuff for my needs.
 
-This has a handy algorithm in Python:
-
-https://github.com/jqr/php-serialize/blob/master/lib/php_serialize.rb#L195
-
-There is a pretty good descriptino of some of the intricaces here:
-
-http://stackoverflow.com/questions/14297926/structure-of-a-serialized-php-string
-
-My origional SO question that led me to write my own solution:
-
-http://stackoverflow.com/questions/31219158/analyse-parse-a-serialized-php-data-containining-objects/31223873
+* This has a handy algorithm in Python:  
+  https://github.com/jqr/php-serialize/blob/master/lib/php_serialize.rb#L195
+* There is a pretty good descriptino of some of the intricaces here:  
+  http://stackoverflow.com/questions/14297926/structure-of-a-serialized-php-string
+* My origional SO question that led me to write my own solution:  
+  http://stackoverflow.com/questions/31219158/analyse-parse-a-serialized-php-data-containining-objects/31223873
+* This excerpt from the PHP Internals book gives a great breakdown of all of the data types:  
+  http://www.phpinternalsbook.com/classes_objects/serialization.html
 
