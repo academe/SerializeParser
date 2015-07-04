@@ -1,0 +1,34 @@
+{
+    "name": "academe/serializeparser",
+    "type": "package",
+    "description": "A PHP parser for serialized data, to be able to "peek" into serialize strings.",
+    "keywords": ["php", "serialize", "unserialize"],
+    "homepage": "https://github.com/academe/SerializeParser",
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name": "Jason Judge",
+            "email": "jason.judge@academe.co.uk",
+            "homepage": "https://academe.co.uk/"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.4.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Academe\\SerializeParser\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Academe\\SerializeParser\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    }
+}
