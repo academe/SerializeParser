@@ -18,6 +18,7 @@ may not even exist in the application.
 Here is a simple example:
 
 ~~~php
+// Create a complex arr/object/string/number/boolean to serialize.
 $obj = new  \Academe\SerializeParser\StringReader('x');
 $obj->foo = true;
 $data = ['a' => 1, ['foo' => 'bar', $obj, 'b' => false];
@@ -26,6 +27,8 @@ $serialized = serialize($data);
 echo $serialized;
 //a:3:{s:1:"a";i:1;i:0;a:2:{s:3:"foo";s:3:"bar";i:0;O:36:"Academe\SerializeParser\StringReader":4:{s:6:"*pos";i:0;s:6:"*max";i:0;s:9:"*string";a:1:{i:0;s:1:"x";}s:3:"foo";b:1;}}s:1:"b";b:0;}
 
+// Now parse it to look what it inside, without instantiating the
+// original objects in it.
 $parser = new \Academe\SerializeParser\Parser;
 $parsed = $parser->parse($serialized);
 
@@ -72,9 +75,15 @@ for logging, showing to the user etc.
 
 ## TODO
 
-* Tests
+* Tests.
 * In-code documentation.
 * Maybe make the `Parser::parse()` method static.
+
+## Want to Help?
+
+If you fancy writing some tests, have found a bug, or can extend it to handle more
+cases of serialized data, then please feel free to get involved. PRs, issues, or just
+email me - whatever you like.
 
 ## Source Specification
 
