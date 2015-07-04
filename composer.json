@@ -1,7 +1,7 @@
 {
     "name": "academe/serializeparser",
     "type": "package",
-    "description": "A PHP parser for serialized data, to be able to "peek" into serialize strings.",
+    "description": "A PHP parser for serialized data, to be able to 'peek' into serialize strings.",
     "keywords": ["php", "serialize", "unserialize"],
     "homepage": "https://github.com/academe/SerializeParser",
     "license": "MIT",

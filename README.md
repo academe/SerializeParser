@@ -82,6 +82,7 @@ for logging, showing to the user etc.
 * Tests.
 * In-code documentation.
 * Maybe make the `Parser::parse()` method static.
+* Make the StringReader a little more efficient. Efficiency was not key in getting this working.
 
 ## Want to Help?
 
