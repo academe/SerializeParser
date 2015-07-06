@@ -6,11 +6,10 @@
 
 class Parser
 {
-    // Protected and private opbject attributes will have prefixes
+    // Protected and private opbject properties will have prefixes
     // to their names. We will strip those prefixes off by default.
 
     const PROTECTED_PREFIX = "\0*\0";
-    const PRIVATE_PREFIX = "\0<s>\0";
 
     public function parse($string)
     {
@@ -48,7 +47,7 @@ class Parser
                 break;
 
             case 'O':
-                // Object: O:length:"class":length:{[attribute][value]...}
+                // Object: O:length:"class":length:{[property][value]...}
                 $len = (int)$string->readUntil(':');
 
                 // +2 for quotes
@@ -57,38 +56,40 @@ class Parser
                 // Eat the separator
                 $string->read(1);
 
-                // Do the attributes.
+                // Do the properties.
                 // Initialise with the original name of the class.
-                $attributes = ['__class_name' => $class];
+                $properties = ['__class_name' => $class];
 
-                // Read the number of attribuites.
+                // Read the number of properties.
                 $len = (int)$string->readUntil(':');
 
-                // Eat "{" holding the attributes.
+                // Eat "{" holding the properties.
                 $string->read(1);
 
                 for($i=0; $i < $len; $i++) {
-                    $attr_key = $this->doParse($string);
-                    $attr_value = $this->doParse($string);
+                    $prop_key = $this->doParse($string);
+                    $prop_value = $this->doParse($string);
 
                     // Strip the protected and private prefixes from the names.
-                    // Maybe replace them with something more usable, such as "protected:" and "private:"?
+                    // Maybe replace them with something more informative, such as "protected:" and "private:"?
 
-                    if (substr($attr_key, 0, strlen(self::PROTECTED_PREFIX)) == self::PROTECTED_PREFIX) {
-                        $attr_key = substr($attr_key, strlen(self::PROTECTED_PREFIX));
+                    if (substr($prop_key, 0, strlen(self::PROTECTED_PREFIX)) == self::PROTECTED_PREFIX) {
+                        $prop_key = substr($prop_key, strlen(self::PROTECTED_PREFIX));
                     }
 
-                    if (substr($attr_key, 0, strlen(self::PRIVATE_PREFIX)) == self::PRIVATE_PREFIX) {
-                        $attr_key = substr($attr_key, strlen(self::PRIVATE_PREFIX));
+                    if (substr($prop_key, 0, 1) == "\0") {
+                        list(, $private_class, $private_property_name) = explode("\0", $prop_key);
+
+                        $prop_key = $private_property_name;
                     }
 
-                    $attributes[$attr_key] = $attr_value;
+                    $properties[$prop_key] = $prop_value;
                 }
 
-                // Eat "}" terminating attributes.
+                // Eat "}" terminating properties.
                 $string->read(1);
 
-                $val = (object)$attributes;
+                $val = (object)$properties;
 
                 break;
 
