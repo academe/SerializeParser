@@ -21,7 +21,14 @@ Here is a simple example:
 // Create a complex array/object/string/number/boolean to serialize.
 $obj = new  \Academe\SerializeParser\StringReader('xyz');
 $obj->foo = true;
-$data = ['a' => 1, ['foo' => 'bar', $obj, 'b' => false];
+$data = [
+    'a' => 1,
+    [
+        'foo' => 'bar',
+        $obj,
+        'b' => false,
+    ],
+];
 $serialized = serialize($data);
 
 echo $serialized;
