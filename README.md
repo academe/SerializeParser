@@ -1,12 +1,16 @@
 # SerializeParser
-A PHP parser for serialized data, to be able to "peek" into serialize strings.
+A PHP parser for serialized data, to be able to "peek" into serialized strings.
 
 ## Purpose
 
-I had a bunch of PHP serialized data in the datanase, and needed to peek into
+I had a bunch of PHP serialized data in the database, and needed to inspect
 that data for presenting information to the administrator. There appeared to be
 no way to interpret this data in PHP without instantiating all the objects that
-were in that data, and I did not want to do that.
+were in that data, and I did not want to do that, and did not have all the
+classes handy anyway.
+
+There is a setting that will allow you to replace *missing* classes with another
+class, but that would still mean instantiating those classes that *could* be found.
 
 So here we are, a simple parser that takes a serialized data string, and tries
 to deserialize it, but replacing all objects with a `stdClass` so we are not
@@ -31,10 +35,11 @@ $data = [
 ];
 $serialized = serialize($data);
 
+// Take a look a how PHP has serialised it.
 echo $serialized;
 //a:3:{s:1:"a";i:1;i:0;a:2:{s:3:"foo";s:3:"bar";i:0;O:36:"Academe\SerializeParser\StringReader":4:{s:6:"*pos";i:0;s:6:"*max";i:2;s:9:"*string";a:3:{i:0;s:1:"x";i:1;s:1:"y";i:2;s:1:"z";}s:3:"foo";b:1;}}s:1:"b";b:0;}
 
-// Now parse it to look what it inside, without instantiating the
+// Now parse it to look at what it inside, without instantiating the
 // original objects in it.
 $parser = new \Academe\SerializeParser\Parser;
 $parsed = $parser->parse($serialized);
