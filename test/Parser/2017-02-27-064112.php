@@ -2,9 +2,13 @@
 
 require_once __DIR__ . '/../include.php';
 
-$a = 'unicode: ✔';
+$input = 'unicode: ✔';
+$output = 'unicode: ✔';
 
 $parser = new Academe\SerializeParser\Parser();
 
-$data = $parser->parse( serialize( $GLOBALS ) );
+$output = $parser->parse( serialize( $input ) );
+
+assert( '$input === $output', "'$input' === '$output'" );
+
 
