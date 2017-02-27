@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/academe/SerializeParser.png?branch=master)](https://travis-ci.org/academe/SerializeParser)
+[![Latest Stable Version](https://poser.pugx.org/academe/SerializeParser/version.png)](https://packagist.org/packages/academe/SerializeParser)
+[![Total Downloads](https://poser.pugx.org/academe/SerializeParser/d/total.png)](https://packagist.org/packages/academe/SerializeParser)
 
 # SerializeParser
 
