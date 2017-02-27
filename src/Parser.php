@@ -11,12 +11,20 @@ class Parser
 
     const PROTECTED_PREFIX = "\0*\0";
 
+    /**
+     * Parse a string containing a serialized data structure.
+     * This is the initial entry point into the recursive parser.
+     * FIXME: work out some way the string reader can be mocked.
+     */
     public function parse($string)
     {
         return $this->doParse(new StringReader($string));
     }
 
-    protected function doParse($string)
+    /**
+     * This is the recursive parser.
+     */
+    protected function doParse(StringReader $string)
     {
         $val = null;
 
