@@ -70,8 +70,8 @@ class ParserTest extends TestCase
      */
     public function testUtf8UnicodeStringTick()
     {
-      $this->parseRaw( 'unicode: ✔' );
-      $this->assertSame( $this->parsed, 'unicode: ✔' );
+      $this->parseRaw('unicode: ✔');
+      $this->assertSame($this->parsed, 'unicode: ✔');
     }
 
     /**
@@ -79,7 +79,34 @@ class ParserTest extends TestCase
      */
     public function testUtf8UnicodeStringTickQuoted()
     {
-      $this->parseRaw( '"unicode: ✔"' );
-      $this->assertSame( $this->parsed, '"unicode: ✔"' );
+      $this->parseRaw('"unicode: ✔"');
+      $this->assertSame($this->parsed, '"unicode: ✔"');
+    }
+
+    /**
+     * An empty string with just "nothing" quoted.
+     */
+    public function testEmptyString()
+    {
+      $this->parseRaw('');
+      $this->assertSame($this->parsed, '');
+    }
+
+    /**
+     * An empty string with just "nothing" quoted.
+     */
+    public function testEmptyStringQuoted()
+    {
+      $this->parseRaw('""');
+      $this->assertSame($this->parsed, '""');
+    }
+
+    /**
+     * An string with multiple quotes.
+     */
+    public function testSingleQuoteString()
+    {
+      $this->parseRaw('"');
+      $this->assertSame($this->parsed, '"');
     }
 }
