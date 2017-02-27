@@ -96,6 +96,12 @@ class StringReader
         // Only remove exactly one quote from the start and the end,
         // and then only if there is one at each end.
 
-        return preg_replace('/^("(.*)")$/', '$2', $string);
+        if (strlen($string) < 2 || substr($string, 0, 1) !== '"' || substr($string, -1, 1) !== '"') {
+            // Too short, or does not start or end with a quote.
+            return $string;
+        }
+
+        // Return the middle of the string, from the second character to the second-but-last.
+        return substr($string, 1, -1);
     }
 }
