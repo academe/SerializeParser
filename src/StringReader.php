@@ -52,12 +52,12 @@ class StringReader
     {
         $value = '';
 
-        while(null != ($one = $this->readOne())) {
-            if ($one != $char || !$discard_char) {
+        while(null !== ($one = $this->readOne())) {
+            if ($one !== $char || !$discard_char) {
                 $value .= $one;
             }
 
-            if ($one == $char) {
+            if ($one === $char) {
                 break;
             }
         }
@@ -66,7 +66,7 @@ class StringReader
     }
 
     /**
-     * Read $count characters, or until we have reaced the end,
+     * Read $count characters, or until we have reached the end,
      * whichever comes first.
      * By default, remove enclosing double-quotes from the result.
      */
@@ -82,10 +82,20 @@ class StringReader
         return $strip_quotes ? $this->stripQuotes($value) : $value;
     }
 
+    /**
+     * Remove a single set of double-quotes from around a string.
+     *  abc => abc
+     *  "abc" => abc
+     *  ""abc"" => "abc"
+     * 
+     * @param string string
+     * @returns string
+     */
     public function stripQuotes($string)
     {
-        // FIXME: only remove exactly one quote from the start and the end.
-        // I won't fix this until we have a test to show how it fails.
-        return trim($string, '"');
+        // Only remove exactly one quote from the start and the end,
+        // and then only if there is one at each end.
+
+        return preg_replace('/^("(.*)")$/', '$2', $string);
     }
 }

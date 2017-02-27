@@ -19,6 +19,9 @@ class ParserTest extends TestCase
      * Parse a data structre as a serialized string and return a JSON encoded version
      * of the resulting structure.
      * The JSON encoding makes it easier to apply assertions.
+     *
+     * @param $data mixed Any data structure.
+     * @returns string JSON encoded parsed data
      */
     protected function parseData($data)
     {
@@ -69,5 +72,14 @@ class ParserTest extends TestCase
     {
       $this->parseRaw( 'unicode: ✔' );
       $this->assertSame( $this->parsed, 'unicode: ✔' );
+    }
+
+    /**
+     * Parse a UTF-8 encoded Unicode string.
+     */
+    public function testUtf8UnicodeStringTickQuoted()
+    {
+      $this->parseRaw( '"unicode: ✔"' );
+      $this->assertSame( $this->parsed, '"unicode: ✔"' );
     }
 }
