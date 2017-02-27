@@ -28,6 +28,14 @@ class ParserTest extends TestCase
     }
 
     /**
+     * Parse a data structure from a serialized string and return the raw result.
+     */
+    protected function parseRow( $data )
+    {
+      return $this->parsed = $this->parser->parse( serialize( $data ) );
+    }
+
+    /**
      * Parse a simple string.
      */
     public function testParseSimpleString()
@@ -52,5 +60,14 @@ class ParserTest extends TestCase
     {
         $this->parseData(['abc' => '123']);
         $this->assertSame($this->parsed, '{"abc":"123"}');
+    }
+
+    /**
+     * Parse a UTF-8 encoded Unicode string.
+     */
+    public function testUtf8UnicodeStringTick()
+    {
+      $this->parseRaw( 'unicode: ✔' );
+      $this->assertSame( $this->parsed, 'unicode: ✔' );
     }
 }
