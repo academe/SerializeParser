@@ -1,4 +1,7 @@
+[![Build Status](https://travis-ci.org/academe/SerializeParser.png?branch=master)](https://travis-ci.org/academe/SerializeParser)
+
 # SerializeParser
+
 A PHP parser for serialized data, to be able to "peek" into serialized strings.
 
 ## Purpose
