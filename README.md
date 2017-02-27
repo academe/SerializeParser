@@ -26,8 +26,10 @@ Here is a simple example:
 
 ```php
 // Create a complex array/object/string/number/boolean to serialize.
-$obj = new  \Academe\SerializeParser\StringReader('xyz');
+
+$obj = new \Academe\SerializeParser\StringReader('xyz');
 $obj->foo = true;
+
 $data = [
     'a' => 1,
     [
@@ -36,14 +38,40 @@ $data = [
         'b' => false,
     ],
 ];
+
 $serialized = serialize($data);
 
 // Take a look a how PHP has serialised it.
+
 echo $serialized;
+
 // a:3:{s:1:"a";i:1;i:0;a:3:{s:3:"foo";s:3:"bar";i:0;O:36:"Academe\SerializeParser\StringReader":4:{s:6:"*pos";i:0;s:6:"*max";i:2;s:9:"*string";s:3:"xyz";s:3:"foo";b:1;}i:1;O:7:"myClass":2:{s:12:"*protected";s:4:"prot";s:16:"myClassprivate";s:4:"priv";}}s:1:"b";b:0;}
+//
+// Somewhat beautified:
+
+/*
+a:3:{
+    s:1:"a";i:1;
+    i:0;a:3:{
+        s:3:"foo";s:3:"bar";
+        i:0;O:36:"Academe\SerializeParser\StringReader":4:{
+            s:6:"*pos";i:0;
+            s:6:"*max";i:2;
+            s:9:"*string";s:3:"xyz";
+            s:3:"foo";b:1;
+        }
+        i:1;O:7:"myClass":2:{
+            s:12:"*protected";s:4:"prot";
+            s:16:"myClassprivate";s:4:"priv";
+        }
+    }
+    s:1:"b";b:0;
+}
+*/
 
 // Now parse it to look at what it inside, without instantiating the
 // original objects in it.
+
 $parser = new \Academe\SerializeParser\Parser;
 $parsed = $parser->parse($serialized);
 
@@ -83,6 +111,7 @@ array(3) {
   ["b"]=>
   bool(false)
 }
+*/
 ```
 
 Note that the `StringReader` class has been unserialized as `stdClass` and the original
