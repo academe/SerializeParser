@@ -117,7 +117,8 @@ array(3) {
 
 Note that the `StringReader` class has been unserialized as `stdClass` and the original
 name moved to attribute `__class_name`. The protected and private attributes are all
-also present and accessible.
+also present and accessible (though the final parsed structure does not show which were
+protected or private - maybe a metadata attribute could list those?).
 
 Remember, the purpose of this is not to reconstruct the original data as an accurate
 representation. It is to allow the data to be inspected and some key values pulled out
@@ -125,8 +126,6 @@ for logging, showing to the user etc.
 
 ## TODO
 
-* Tests.
-* In-code documentation.
 * Maybe make the `Parser::parse()` method static.
 * Make the StringReader a little more efficient. Efficiency was not key in getting this working.
 * Inject the string reader so it can be mocked for testing.
