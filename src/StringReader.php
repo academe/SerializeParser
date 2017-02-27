@@ -21,8 +21,10 @@ class StringReader
         // Split the string up into an array of UTF-8 characters.
         // As an array we can read through it one character at a time.
 
-        $this->string = preg_split('//u', $string, -1, PREG_SPLIT_NO_EMPTY);
-        $this->max = count($this->string) - 1;
+        //$this->string = preg_split('//u', $string, -1, PREG_SPLIT_NO_EMPTY);
+        //$this->max = count($this->string) - 1;
+        $this->string = $string;
+        $this->max = strlen($this->string) - 1;
     }
 
     /**

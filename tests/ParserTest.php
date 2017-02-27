@@ -20,11 +20,19 @@ class ParserTest extends TestCase
      * of the resulting structure.
      * The JSON encoding makes it easier to apply assertions.
      */
-    protected function parseData($date)
+    protected function parseData($data)
     {
-        $this->parsed = json_encode($this->parser->parse(serialize($date)));
+        $this->parsed = json_encode($this->parser->parse(serialize($data)));
 
         return $this->parsed;
+    }
+
+    /**
+     * Parse a data structure from a serialized string and return the raw result.
+     */
+    protected function parseRaw( $data )
+    {
+      return $this->parsed = $this->parser->parse( serialize( $data ) );
     }
 
     /**
@@ -52,5 +60,14 @@ class ParserTest extends TestCase
     {
         $this->parseData(['abc' => '123']);
         $this->assertSame($this->parsed, '{"abc":"123"}');
+    }
+
+    /**
+     * Parse a UTF-8 encoded Unicode string.
+     */
+    public function testUtf8UnicodeStringTick()
+    {
+      $this->parseRaw( 'unicode: ✔' );
+      $this->assertSame( $this->parsed, 'unicode: ✔' );
     }
 }
