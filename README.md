@@ -24,7 +24,7 @@ may not even exist in the application.
 
 Here is a simple example:
 
-~~~php
+```php
 // Create a complex array/object/string/number/boolean to serialize.
 $obj = new  \Academe\SerializeParser\StringReader('xyz');
 $obj->foo = true;
@@ -40,7 +40,7 @@ $serialized = serialize($data);
 
 // Take a look a how PHP has serialised it.
 echo $serialized;
-//a:3:{s:1:"a";i:1;i:0;a:2:{s:3:"foo";s:3:"bar";i:0;O:36:"Academe\SerializeParser\StringReader":4:{s:6:"*pos";i:0;s:6:"*max";i:2;s:9:"*string";a:3:{i:0;s:1:"x";i:1;s:1:"y";i:2;s:1:"z";}s:3:"foo";b:1;}}s:1:"b";b:0;}
+// a:3:{s:1:"a";i:1;i:0;a:3:{s:3:"foo";s:3:"bar";i:0;O:36:"Academe\SerializeParser\StringReader":4:{s:6:"*pos";i:0;s:6:"*max";i:2;s:9:"*string";s:3:"xyz";s:3:"foo";b:1;}i:1;O:7:"myClass":2:{s:12:"*protected";s:4:"prot";s:16:"myClassprivate";s:4:"priv";}}s:1:"b";b:0;}
 
 // Now parse it to look at what it inside, without instantiating the
 // original objects in it.
@@ -54,11 +54,11 @@ array(3) {
   ["a"]=>
   int(1)
   [0]=>
-  array(2) {
+  array(3) {
     ["foo"]=>
     string(3) "bar"
     [0]=>
-    object(stdClass)#5 (5) {
+    object(stdClass)#6 (5) {
       ["__class_name"]=>
       string(36) "Academe\SerializeParser\StringReader"
       ["pos"]=>
@@ -66,23 +66,24 @@ array(3) {
       ["max"]=>
       int(2)
       ["string"]=>
-      array(3) {
-        [0]=>
-        string(1) "x"
-        [1]=>
-        string(1) "y"
-        [2]=>
-        string(1) "z"
-      }
+      string(3) "xyz"
       ["foo"]=>
       bool(true)
+    }
+    [1]=>
+    object(stdClass)#7 (3) {
+      ["__class_name"]=>
+      string(7) "myClass"
+      ["protected"]=>
+      string(4) "prot"
+      ["private"]=>
+      string(4) "priv"
     }
   }
   ["b"]=>
   bool(false)
 }
-*/
-~~~
+```
 
 Note that the `StringReader` class has been unserialized as `stdClass` and the original
 name moved to attribute `__class_name`. The protected and private attributes are all
@@ -98,6 +99,7 @@ for logging, showing to the user etc.
 * In-code documentation.
 * Maybe make the `Parser::parse()` method static.
 * Make the StringReader a little more efficient. Efficiency was not key in getting this working.
+* Inject the string reader so it can be mocked for testing.
 
 ## Want to Help?
 
