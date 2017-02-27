@@ -1,8 +1,10 @@
-<?php namespace Academe\SerializeParser;
+<?php
+
+namespace Academe\SerializeParser;
 
 /**
- * Given a string, this class will the string to be scanned
- * through using a number of terminating rules:
+ * Given a string, this class will read through the string using
+ * one of a number of terminating rules:
  * - One character.
  * - A specified number of characters.
  * - Until a matching character is found.
@@ -62,7 +64,8 @@ class StringReader
     }
 
     /**
-     * Read $count characters until or until we have reaced the end.
+     * Read $count characters, or until we have reaced the end,
+     * whichever comes first.
      * By default, remove enclosing double-quotes from the result.
      */
     public function read($count, $strip_quotes = true)
@@ -80,6 +83,7 @@ class StringReader
     public function stripQuotes($string)
     {
         // FIXME: only remove exactly one quote from the start and the end.
+        // I won't fix this until we have a test to show how it fails.
         return trim($string, '"');
     }
 }
